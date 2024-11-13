@@ -37,7 +37,6 @@ class Snake {
 
         if (head.x === game.food.x && head.y === game.food.y) {
             game.score++;
-            game.speed -= 5;
             game.food = game.generateFood();
             document.getElementById('scoreBoard').innerText = "Score: " + game.score;
         } else {
@@ -92,7 +91,7 @@ class Game {
         this.snake = new Snake();
         this.food = new Food();
         this.score = 0;
-        this.speed = 300;
+        this.speed = 300;  // Default speed; will be adjusted based on difficulty
         this.gamePaused = false;
         this.gameInterval = null;
 
@@ -100,9 +99,36 @@ class Game {
     }
 
     start() {
-        document.getElementById('startScreen').style.display = 'none';
-        document.getElementById('gameOverScreen').style.display = 'none';
-        this.gameInterval = setInterval(() => this.draw(), this.speed);
+        const difficulty = this.getDifficulty();
+        if (difficulty) {
+            this.setSpeedByDifficulty(difficulty);
+            document.getElementById('chooseDifficulty').style.display = 'none'; // Hide difficulty selection
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('gameOverScreen').style.display = 'none';
+            this.gameInterval = setInterval(() => this.draw(), this.speed);
+        } else {
+            alert("Please select a difficulty level to start the game.");
+        }
+    }
+
+    getDifficulty() {
+        const difficultyRadios = document.getElementsByName("difficulty");
+        for (const radio of difficultyRadios) {
+            if (radio.checked) {
+                return radio.value;
+            }
+        }
+        return null; // No selection made
+    }
+
+    setSpeedByDifficulty(difficulty) {
+        if (difficulty === "easy") {
+            this.speed = 300;
+        } else if (difficulty === "medium") {
+            this.speed = 200;
+        } else if (difficulty === "difficult") {
+            this.speed = 100;
+        }
     }
 
     restart() {

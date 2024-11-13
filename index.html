@@ -8,29 +8,28 @@
 </head>
 <body>
     <div id="startScreen">
-        <div>Snake Game</div>
+        <h2>Snake Game</h2>
         <button onclick="game.start()">Start Game</button>
     </div>
-    <div id="gameOverScreen">
-        <div>Game Over!</div>
+    <div id="gameOverScreen" style="display: none;">
+        <h2>Game Over!</h2>
         <div id="finalScore"></div>
         <button onclick="game.restart()">Restart Game</button>
     </div>
     <div id="chooseDifficulty">
-        <div>choose difficulty</div>
+        <h3>Choose Difficulty</h3>
         <div class="radioButton">
-            <input type="radio" name="easy" id="easy">
-            <label for="easy">easy</label>
-            <input type="radio" name="medium" id="medium">
-            <label for="medium">medium</label>
-            <input type="radio" name="difficult" id="difficult">
-            <label for="difficult">difficult</label>
+            <input type="radio" name="difficulty" id="easy" value="easy">
+            <label for="easy">Easy</label>
+            <input type="radio" name="difficulty" id="medium" value="medium">
+            <label for="medium">Medium</label>
+            <input type="radio" name="difficulty" id="difficult" value="difficult">
+            <label for="difficult">Difficult</label>
         </div>
-        
     </div>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
     <div id="scoreBoard">Score: 0</div>
-    <div id="pauseScreen">Game Paused</div>
+    <div id="pauseScreen" style="display: none;">Game Paused</div>
     <script src="snake.js"></script>
 </body>
 </html>
